@@ -1,0 +1,52 @@
+{
+  "name": "visitor_api",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "ENV=local nodemon server.js",
+    "lint": "eslint .",
+    "prepare": "husky install",
+    "start": "ENV=local node server.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/westfieldcorp/visitor_api.git"
+  },
+  "author": "Tech Holding",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/westfieldcorp/visitor_api/issues"
+  },
+  "homepage": "https://github.com/westfieldcorp/visitor_api#readme",
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.1.0",
+    "@commitlint/config-conventional": "^16.0.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "husky": "^7.0.4",
+    "jest": "^27.4.7",
+    "nodemon": "^2.0.15"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "helmet": "^5.0.2",
+    "knex": "^1.0.5",
+    "morgan": "^1.10.0",
+    "objection": "^3.0.1",
+    "pg": "^8.7.3",
+    "winston": "^3.4.0"
+  }
+}

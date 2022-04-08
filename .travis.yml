@@ -1,0 +1,76 @@
+language: node_js
+
+os: linux
+dist: bionic
+arch: arm64
+
+cache: npm
+
+branches:
+  only:
+    - develop
+    - main
+
+stages:
+  - name: db:install
+    if: type != api
+  - name: db:lint:test
+    if: type != api
+
+  - name: api:install
+    if: type != api
+  - name: api:lint:test
+    if: type != api
+  
+  - name: db:deploy
+    if: type == push
+
+  - name: api:deploy
+    if: type == api
+
+
+jobs:
+  include:
+    - stage: db:install
+      node_js: 14
+      before_install: cd db
+      install: npm ci --ignore-scripts
+      script: skip
+
+    - stage: db:lint:test
+      node_js: 14
+      before_install: cd db
+      install: npm ci --ignore-scripts
+      script: npm run lint
+    - stage: db:lint:test
+      node_js: 14
+      before_install: cd db
+      install: npm ci --ignore-scripts
+      script: npm test
+
+    - stage: db:deploy
+      node_js: 14
+      before_install: cd db
+      install: npm ci --ignore-scripts --omit=dev
+      script:
+        - echo $TRAVIS_BRANCH
+        - echo $TRAVIS_COMMIT
+
+    - stage: api:install
+      node_js: 16
+      install: npm ci --ignore-scripts
+      script: skip
+
+    - stage: api:lint:test
+      node_js: 16
+      install: npm ci --ignore-scripts
+      script: npm run lint
+    - stage: api:lint:test
+      node_js: 16
+      install: npm ci --ignore-scripts
+      script: npm test
+
+    - stage: api:deploy
+      node_js: 16
+      install: npm ci --ignore-scripts --omit=dev
+      script: echo Deploy
